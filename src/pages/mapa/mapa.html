@@ -15,4 +15,19 @@
 
 <ion-content padding>
 
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+ <sebm-google-map [latitude]="miCoo.lat" [longitude]="miCoo.lng" [zoom]="13">
+
+         <sebm-google-map-marker *ngFor="let item of items | async" [latitude]="+item.lat" [longitude]="+item.long" >
+       <sebm-google-map-info-window [disableAutoPan]="false">
+        <strong>{{item.nick}}</strong>
+       </sebm-google-map-info-window>
+     </sebm-google-map-marker>
+
+   </sebm-google-map>
+
+
 </ion-content>

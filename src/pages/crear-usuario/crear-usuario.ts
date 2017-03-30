@@ -15,15 +15,15 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'crear-usuario.html'
 })
 export class CrearUsuarioPage {
-   usuario={nick:"",long:"",lat:""}
+   usuario={nick:"",long:0,lat:0}
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af:AngularFire,  public storage: Storage, private platform: Platform, private geolocation: Geolocation, public toastCtrl: ToastController) {
   platform.ready().then(() => {
 
       // get current position
       geolocation.getCurrentPosition().then(pos => {
-          this.usuario.long=pos.coords.longitude.toString();
-         this.usuario.lat=pos.coords.latitude.toString();
+          this.usuario.long=pos.coords.longitude;
+         this.usuario.lat=pos.coords.latitude;
         console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
       });
 

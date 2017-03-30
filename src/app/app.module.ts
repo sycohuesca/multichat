@@ -10,7 +10,7 @@ import { CrearGrupoPage } from '../pages/crear-grupo/crear-grupo';
 import { CrearUsuarioPage } from '../pages/crear-usuario/crear-usuario';
 import { CrearMensajePage } from '../pages/crear-mensaje/crear-mensaje';
 import { AngularFireModule } from 'angularfire2';
-
+import { AgmCoreModule } from 'angular2-google-maps/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
@@ -40,7 +40,10 @@ export const firebaseConfig = {
   imports: [
     IonicModule.forRoot(MyApp),
        AngularFireModule.initializeApp(firebaseConfig),
-       IonicStorageModule.forRoot()
+       IonicStorageModule.forRoot(),
+       AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCPxpzBxMnYclH-uOehpF8uoyl7lHguqW4'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

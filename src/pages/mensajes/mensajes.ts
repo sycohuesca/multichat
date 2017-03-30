@@ -45,10 +45,9 @@ enviarMensaje(){
 seguir(){
 
       this.items.subscribe(val=>{
-     if(this.prim){
+
         console.log('es la segunda') ;
-     }
-          this.prim=true;
+
   });
 }
 
