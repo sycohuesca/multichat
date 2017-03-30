@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { LoadingController } from 'ionic-angular';
 import { CrearMensajePage } from '../crear-mensaje/crear-mensaje';
+import { ToastController } from 'ionic-angular';
 /*
   Generated class for the Mensajes page.
 
@@ -18,7 +19,7 @@ export class MensajesPage {
  items: FirebaseListObservable<any[]>;
   grupo:any=[];
    prim:boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af:AngularFire, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af:AngularFire, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
 
   this.grupo=navParams.get('grupo');
 
@@ -43,6 +44,12 @@ enviarMensaje(){
     loader.present();
   }
 seguir(){
+     let toast=this.toastCtrl.create({
+      message: 'Notificaciones activadas.',
+      duration: 1000,
+         position: 'top'
+    });
+     toast.present();
 
       this.items.subscribe(val=>{
 

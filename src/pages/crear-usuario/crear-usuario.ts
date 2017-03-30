@@ -37,7 +37,7 @@ export class CrearUsuarioPage {
 
     let toast=this.toastCtrl.create({
       message: 'Usuario creado.',
-      duration: 3000,
+      duration: 1000,
          position: 'top'
     });
      toast.present();
