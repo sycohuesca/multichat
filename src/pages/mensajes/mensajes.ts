@@ -4,6 +4,8 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { LoadingController } from 'ionic-angular';
 import { CrearMensajePage } from '../crear-mensaje/crear-mensaje';
 import { ToastController } from 'ionic-angular';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Storage } from '@ionic/storage';
 /*
   Generated class for the Mensajes page.
 
@@ -19,7 +21,8 @@ export class MensajesPage {
  items: FirebaseListObservable<any[]>;
   grupo:any=[];
    prim:boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af:AngularFire, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+    nick:String="";
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af:AngularFire, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public localNotifications: LocalNotifications,  public storage:Storage) {
 
   this.grupo=navParams.get('grupo');
 
@@ -42,8 +45,16 @@ enviarMensaje(){
       duration: 100
     });
     loader.present();
+
   }
+    ionViewWillEnter(){
+         this.storage.get('nick').then(val=>{
+            this.nick=val;
+        });
+    }
 seguir(){
+
+
      let toast=this.toastCtrl.create({
       message: 'Notificaciones activadas.',
       duration: 1000,
@@ -52,8 +63,23 @@ seguir(){
      toast.present();
 
       this.items.subscribe(val=>{
+       if(val[0].autor!=this.nick){
+                       if(this.prim ){
+this.localNotifications.schedule({
+  id: 1,
+    title:'Multichat de '+val[0].autor,
+  text: val[0].texto,
+ led: '3DE42B',
+   sound: 'file://assets/sound.ogg',
+    icon:'file:assets/icono.png'
+});
+                             console.log(val[0]) ;
 
-        console.log('es la segunda') ;
+       }
+             }
+
+          this.prim=true;
+
 
   });
 }

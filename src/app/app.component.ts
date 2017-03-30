@@ -21,6 +21,8 @@ export class MyApp {
     loader.present();
       statusBar.styleDefault();
       splashScreen.hide();
+
+
     });
   }
 }

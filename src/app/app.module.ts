@@ -15,6 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCd7fI2t2F7upJWH8CcTlMlsgjWEVqybRU',
@@ -62,6 +63,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     Geolocation,
+    LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
 
   ]

@@ -15,7 +15,7 @@ import { ToastController } from 'ionic-angular';
 })
 export class CrearMensajePage {
     grupo:String="";
-
+  id:String;
     mensaje={autor:"sin autor",texto:"",fecha:""};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public af:AngularFire, public storage:Storage, public toastCtrl: ToastController) {
@@ -24,12 +24,17 @@ export class CrearMensajePage {
       this.mensaje.autor=val;
 
        });
+        storage.get('id').then((val) => {
+      this.id=val;
+
+       });
 
   }
 enviar(){
    this.mensaje.fecha=(2490517872128-new Date().getTime()).toString();
 
    this.af.database.list('/grupos/'+this.grupo+'/mensajes').push(this.mensaje);
+   // this.af.database.list('/usuarios/'+this.id+'/grupos').push({grupoId:this.grupo});
      let toast=this.toastCtrl.create({
       message: 'Mensaje enviado.',
       duration: 1000,
