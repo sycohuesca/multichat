@@ -22,6 +22,7 @@ export class MensajesPage {
   grupo:any=[];
    prim:boolean=false;
     nick:String="";
+    noti:number=0;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af:AngularFire, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public localNotifications: LocalNotifications,  public storage:Storage) {
 
   this.grupo=navParams.get('grupo');
@@ -65,15 +66,18 @@ seguir(){
       this.items.subscribe(val=>{
        if(val[0].autor!=this.nick){
                        if(this.prim ){
+                           let data=new Date().toLocaleTimeString();
 this.localNotifications.schedule({
-  id: 1,
+  id: this.noti,
     title:'Multichat de '+val[0].autor,
   text: val[0].texto,
  led: '3DE42B',
    sound: 'file://assets/sound.ogg',
-    icon:'file:assets/icono.png'
+    at:data,
+    icon:'res://icon.png'
 });
                              console.log(val[0]) ;
+                           this.noti=this.noti+1;
 
        }
              }
